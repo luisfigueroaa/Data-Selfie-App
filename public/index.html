@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Node JS Project</title>
+        </head>
+        <body>
+            <script>
+                // Geolocation API
+                if('geolocation' in navigator) {
+                    console.log('Geolocalización disponible.');
+                    // Llama a la función de la API de forma asincrónica para que envie la posición y al llamarla nosotros visualizarla
+                    navigator.geolocation.getCurrentPosition( async position => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        // Escribir los valores de latitud y longitud en el html
+                        document.getElementById('latitude').textContent = lat;
+                        document.getElementById('longitude').textContent = lng;
+                        // console.log(position);
+                        // Objeto data va  a tener los valores de lat y long
+                        const data = {lat , lng};
+                        // Buscar de mi api, pero quiero enviar un 'post' (peticion) asi que agrego un segundo argumento llamado 'options'
+                        const options = {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            // Enviar Data en formato Json
+                            body: JSON.stringify(data)
+                        };
+                        const response = await fetch('/api', options);
+                        const json = await response.json();
+                        console.log(json);
+                    });
+                } else {
+                    console.log('Geolocalización no disponible.')
+                }
+            </script>
+            <h1>Data Selfie App</h1>
+
+            <p>Latitude: <span id="latitude"></span>&deg;<br></p>
+            <p>Longitude: <span id="longitude"></span>&deg;<br></p>
+        </body>
+    </head>
+</html>
