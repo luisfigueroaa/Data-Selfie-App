@@ -40,7 +40,7 @@ async function getData() {
     const image = document.createElement('img');
     const city = document.createElement('div');
                 
-    const api_key = "e7cb8757438b311ec7c9cebbd36ab7c0";
+    const api_key = "THIS IS WHERE YOU MUST WRITE YOUR OPEN WEATHER API";
     const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${item.lat}&lon=${item.lon}&appid=${api_key}`;
     const response = await fetch(api_url);
     const json = await response.json();
